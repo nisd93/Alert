@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF7043</color>
+    <color name="colorPrimaryDark">#F26522</color>
+    <color name="colorAccent">#E64A19</color>
+
+    // App Main
+
+    <color name="app_primary">#B82828</color>
+    //B82828 //184,40,40
+    //Spalsh
+    <color name="splash_bg">#333333</color>
+    <color name="grey_text">#B1B2B4</color>
+
+
+    <color name="grey_text_light">#A1A1A1</color>
+
+    //Login
+    <color name="input_text">#6C6C6C</color>
+
+    <color name="green">#8BC34A</color>
+    <color name="blue">#3F51B5</color>
+    <color name="red">#7B5252</color>
+    <color name="fb">#3b5998</color>
+    <color name="google">#d34836</color>
+    <color name="transparent">#00000000</color>
+    //Text Color
+    <color name="app_text">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="places_text">#292b2c</color>
+
+    <color name="dark_red">#F44336</color>
+
+    <color name="shadow">#d0d8dc</color>
+    <color name="light_grey">#A9A9A9</color>
+    <color name="off_white">#EEEEEE</color>
+    <color name="search_grey">#5B5B5B</color>
+
+    <color name="scrim">#99323232</color>
+</resources>

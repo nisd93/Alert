@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Alert</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
+    <string name="transition_morph">morph_transition</string>
+
+</resources>

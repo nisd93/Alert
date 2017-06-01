@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alert.Alarm;
+import com.alert.AlarmUtils.AlarmScheduler;
 import com.alert.AppUtils.Fonts;
 import com.alert.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -42,10 +44,16 @@ public class AlarmAdapter extends
     public void onBindViewHolder(AlarmHolder holder, int i) {
         Alarm cm = itemModels.get(i);
 
-        holder.tvTime.setTypeface(Fonts.setUtahCondensedBold(context));
-        holder.tvTitle.setTypeface(Fonts.setUtahCondensedBold(context));
+        holder.tvTime.setTypeface(Fonts.setUtahCondensed(context));
+        holder.tvTitle.setTypeface(Fonts.setUtahCondensed(context));
 
-        holder.tvTime.setText(cm.getStatus());
+        Calendar calenderNow = Calendar.getInstance();
+        long alarmTime = AlarmScheduler.getAlarmTime(calenderNow,cm);
+        String alarmDistanceTime = AlarmScheduler.getTimeToAlarmString(
+                context,
+                alarmTime,
+                R.array.alarm_distance);
+        holder.tvTime.setText(alarmDistanceTime);
         holder.tvTitle.setText(cm.getTitle());
 
     }

@@ -11,15 +11,8 @@ import android.graphics.Typeface;
 public class Fonts {
 
     public  static  Typeface setUtahCondensed(Context context){
-        Typeface  tf = Typeface.createFromAsset(context.getAssets(), "fonts/Nunito-Regular.ttf");
+        Typeface  tf = Typeface.createFromAsset(context.getAssets(), "fonts/BebasNeue.otf");
 
         return tf;
     }
-
-    public  static  Typeface setUtahCondensedBold(Context context){
-        Typeface  tf = Typeface.createFromAsset(context.getAssets(), "fonts/Nunito-Bold.ttf");
-
-        return tf;
-    }
-
 }

@@ -2,28 +2,33 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.alert">
 
+    <!-- Allows app to receive ACTION_BOOT_COMPLETED that is broadcast after the system finishes booting -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Allows using PowerManager WakeLocks to keep processor from sleeping or screen from dimming -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Allows access to the vibrator -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Allows an application to read or write the system settings -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- Allows app to disable the keyguard -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <!-- Allows read only access to phone state -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.MainActivity">
-
         </activity>
-
-        <receiver android:name=".AlarmUtils.AlarmReceiver">
-            <intent-filter>
-                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name=".Activity.SplashActivity"
-            android:label="@string/title_activity_splash"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +40,23 @@
         <activity
             android:name=".Activity.DialogActivity"
             android:theme="@style/TranslucentActivity" />
+
+        <receiver android:name=".AlarmUtils.AlarmWakeReceiver"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <receiver
+            android:name=".AlarmUtils.AlarmRegistrar">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.DATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".AlarmUtils.AlarmRingingService"
+            android:enabled="true" />
 
     </application>
 

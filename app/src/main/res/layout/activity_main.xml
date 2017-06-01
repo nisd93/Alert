@@ -28,7 +28,7 @@
                 android:padding="@dimen/scale_3dp"
                 android:text="Set an Alarm"
                 android:textColor="@color/app_text"
-                android:textSize="@dimen/txt_14" />
+                android:textSize="@dimen/txt_16" />
 
         </RelativeLayout>
 

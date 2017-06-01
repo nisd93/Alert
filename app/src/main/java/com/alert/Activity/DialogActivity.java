@@ -3,6 +3,7 @@ package com.alert.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -12,11 +13,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alert.AppUtils.AlarmDataEvent;
 import com.alert.AppUtils.Fonts;
 import com.alert.MorphUtils.FabTransform;
 import com.alert.MorphUtils.MorphTransform;
 import com.alert.R;
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,6 +44,8 @@ public class DialogActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_TYPE, type);
         return intent;
     }
+
+    private EventBus bus = EventBus.getDefault();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +106,13 @@ public class DialogActivity extends AppCompatActivity {
             );
         }
         // Assign values we want
-        final SimpleDateFormat myDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+        final SimpleDateFormat myDateFormat;
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+            myDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa", Locale.US);
+        } else {
+            myDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+        }
+//        final SimpleDateFormat myDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm a", Locale.getDefault());
         dateTimeFragment.startAtCalendarView();
         dateTimeFragment.set24HoursMode(false);
         Calendar cc = Calendar.getInstance();
@@ -111,6 +123,7 @@ public class DialogActivity extends AppCompatActivity {
         int mMinute = cc.get(Calendar.MINUTE);
         dateTimeFragment.setDefaultDateTime(new GregorianCalendar(year, month, mDay, mHour, mMinute).getTime());
         // Define new day and month format
+        dateTimeFragment.setMinimumDateTime(new GregorianCalendar(year, month, mDay, mHour, mMinute).getTime());
         try {
             dateTimeFragment.setSimpleDateMonthAndDayFormat(new SimpleDateFormat("MMMM dd", Locale.getDefault()));
         } catch (SwitchDateTimeDialogFragment.SimpleDateMonthAndDayFormatException e) {
@@ -135,6 +148,10 @@ public class DialogActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                AlarmDataEvent event=null;
+                event=new AlarmDataEvent(edtTitle.getText().toString(),edtTime.getText().toString(),"");
+                bus.post(event);
+                finish();
             }
         });
     }
